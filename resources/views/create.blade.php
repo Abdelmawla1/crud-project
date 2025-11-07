@@ -14,26 +14,30 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <label for="" class="form-label">Image</label>
-                        <input type="file" class="form-control" name="" id="">
+                        <input type="file" class="form-control" name="image">
                     </div>
                     <div class="form-group mt-3">
                         <label for="" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="" id="">
+                        <input type="text" class="form-control" name="title">
                     </div>
                     <div class="form-group mt-3">
                         <label for="" class="form-label">Category</label>
-                        <select class="form-control" name="" id="">
-                            <option value="">select 1</option>
-                            <option value="">select 2</option>
-                            <option value="">select 3</option>
+                        <select class="form-control" name="category_id" id="">
+                            <option value="">Select</option>
+                            @if(count($categories) > 0)
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="form-group mt-3">
                         <label for="" class="form-label">Description</label>
-                        <textarea type="file" class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                        <textarea type="file" class="form-control" name="description" cols="30" rows="10"></textarea>
                     </div>
                     <div class="form-group mt-3">
                         <button type="submit" class="btn btn-primary">Create</button>
