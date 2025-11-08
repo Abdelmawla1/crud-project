@@ -14,7 +14,7 @@
                         <h4>Create Post</h4>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <a class="btn btn-primary mx-1" href="#">Cancel</a>
+                        <a class="btn btn-primary mx-1" href="{{ route('post.index') }}">Cancel</a>
                     </div>
                 </div>
             </div>

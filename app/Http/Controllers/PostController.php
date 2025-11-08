@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -30,7 +31,19 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        dd($request->all());
+        $data = $request->validated();
+        //image uploading
+        // 1- get image
+        $image = $request->file('image');
+        // 2- change it's current name
+        $newImageName = time() . '_' . $image->getClientOriginalName();
+        // 3- move image
+        $image->storeAs('images', $newImageName, 'public');
+        // 4- save new name to database record
+        $data['image'] = $newImageName;
+        Post::create($data);
+
+        return redirect()->route('post.index');
     }
 
     /**
