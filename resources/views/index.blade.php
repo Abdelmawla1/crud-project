@@ -9,7 +9,7 @@
                         <h4>All Posts</h4>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <a class="btn btn-success mx-1" href="#">Create</a>
+                        <a class="btn btn-success mx-1" href="{{ route('post.create') }}">Create</a>
                         <a class="btn btn-dark mx-1" href="#">Trashed</a>
                     </div>
                 </div>
@@ -28,19 +28,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">7</th>
-                        <td>image</td>
-                        <td>title</td>
-                        <td>description</td>
-                        <td>category</td>
-                        <td>publish date</td>
-                        <td>
-                            <a class="btn btn-sm btn-success" href="#">Show</a>
-                            <a class="btn btn-sm btn-primary" href="#">Edit</a>
-                            <a class="btn btn-sm btn-danger" href="#">Delete</a>
-                        </td>
-                    </tr>
+                    @if(count($posts) > 0)
+                        @foreach($posts as $post)
+                            <tr>
+                                <th scope="row">{{ ++$loop->index }}</th>
+                                <td>
+                                    <img src="{{ asset("storage/images/$post->image") }}" alt="" width="100">
+                                </td>
+                                <td>{{$post->title}}</td>
+                                <td>{{$post->description}}</td>
+                                <td>{{$post->category->name}}</td>
+                                <td>{{ $post->created_at->format('d M Y') }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-success" href="#">Show</a>
+                                    <a class="btn btn-sm btn-primary" href="#">Edit</a>
+                                    <a class="btn btn-sm btn-danger" href="#">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
