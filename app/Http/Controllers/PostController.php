@@ -71,7 +71,24 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, string $id)
     {
-        //
+//        dd($request->all());
+        $post = Post::find($id);
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            //image uploading
+            // 1- get image
+            $image = $request->file('image');
+            // 2- change it's current name
+            $newImageName = time() . '_' . $image->getClientOriginalName();
+            // 3- move image
+            $image->storeAs('images', $newImageName, 'public');
+            // 4- save new name to database record
+            $data['image'] = $newImageName;
+        }else{
+            $data['image'] = $post->image;
+        }
+        $post->update($data);
+        return redirect()->route('post.index');
     }
 
     /**
