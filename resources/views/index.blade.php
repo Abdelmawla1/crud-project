@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
                         <a class="btn btn-success mx-1" href="{{ route('post.create') }}">Create</a>
-                        <a class="btn btn-dark mx-1" href="#">Trashed</a>
+                        <a class="btn btn-dark mx-1" href="{{ route('post.trash') }}">Trashed</a>
                     </div>
                 </div>
             </div>
@@ -40,9 +40,17 @@
                                 <td>{{$post->category->name}}</td>
                                 <td>{{ $post->created_at->format('d M Y') }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-success" href="{{ route('post.show', $post->id) }}">Show</a>
-                                    <a class="btn btn-sm btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
-                                    <a class="btn btn-sm btn-danger" href="#">Delete</a>
+                                    <a class="btn btn-sm btn-success"
+                                       href="{{ route('post.show', $post->id) }}">Show</a>
+                                    <a class="btn btn-sm btn-primary"
+                                       href="{{ route('post.edit', $post->id) }}">Edit</a>
+                                    <form action="{{ route('post.destroy', $post->id) }}" method="post"
+                                          id="delete_form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                        {{--                                        <a class="btn btn-sm btn-danger" href="javascript:$('form').submit();">Delete</a>--}}
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
