@@ -44,7 +44,7 @@
                                         <a class="btn btn-sm btn-success mx-1"
                                            href="{{ route('post.restore', $post->id) }}">Restore</a>
 
-                                        <form action="{{ route('post.destroy', $post->id) }}" method="post"
+                                        <form action="{{ route('post.delete', $post->id) }}" method="post"
                                               id="delete_form">
                                             @csrf
                                             @method('DELETE')
