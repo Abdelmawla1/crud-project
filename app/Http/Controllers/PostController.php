@@ -85,7 +85,7 @@ class PostController extends Controller
             $image->storeAs('images', $newImageName, 'public');
             // 4- save new name to database record
             $data['image'] = $newImageName;
-        }else{
+        } else {
             $data['image'] = $post->image;
         }
         $post->update($data);
@@ -107,5 +107,12 @@ class PostController extends Controller
     {
         $posts = Post::onlyTrashed()->get();
         return view('trash', compact('posts'));
+    }
+
+    public function restorePost($id)
+    {
+        $post = Post::onlyTrashed()->find($id);
+        $post->restore();
+        return redirect()->back();
     }
 }

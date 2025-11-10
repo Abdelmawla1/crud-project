@@ -40,17 +40,19 @@
                                 <td>{{$post->category->name}}</td>
                                 <td>{{ $post->created_at->format('d M Y') }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-success"
-                                       href="{{ route('post.show', $post->id) }}">Show</a>
-                                    <a class="btn btn-sm btn-primary"
-                                       href="{{ route('post.edit', $post->id) }}">Edit</a>
-                                    <form action="{{ route('post.destroy', $post->id) }}" method="post"
-                                          id="delete_form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                        {{--                                        <a class="btn btn-sm btn-danger" href="javascript:$('form').submit();">Delete</a>--}}
-                                    </form>
+                                    <div class="d-flex">
+                                        <a class="btn btn-sm btn-success mx-1"
+                                           href="{{ route('post.show', $post->id) }}">Show</a>
+                                        <a class="btn btn-sm btn-primary mx-1"
+                                           href="{{ route('post.edit', $post->id) }}">Edit</a>
+                                        <form action="{{ route('post.destroy', $post->id) }}" method="post"
+                                              id="delete_form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                            {{--                                        <a class="btn btn-sm btn-danger" href="javascript:$('form').submit();">Delete</a>--}}
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
